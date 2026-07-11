@@ -6,7 +6,6 @@ on:
     branches:
       - master
       - dependencies
-      - 'dependencies-**'
   pull_request:
     branches:
       - master
