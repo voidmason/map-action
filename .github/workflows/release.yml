@@ -1,0 +1,20 @@
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to set/move"
+        type: string
+        default: "v1"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: voidmason/simple-tag-release@v1
+        with:
+          tag: ${{ inputs.tag }}
