@@ -4,7 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-      time: "17:00"
     assignees:
       - "nerjs"
     labels:
@@ -22,24 +21,18 @@ updates:
           - "js-yaml"
           - "@types/js-yaml"
 
-      typescript:
+      infra:
         patterns:
           - "typescript"
           - "@types/node"
-
-      eslint:
-        patterns:
+          - "jest"
+          - "ts-jest"
+          - "@types/jest"
           - "eslint"
           - "@typescript-eslint/*"
           - "eslint-config-prettier"
           - "eslint-plugin-prettier"
           - "prettier"
-
-      jest:
-        patterns:
-          - "jest"
-          - "ts-jest"
-          - "@types/jest"
 
       ncc:
         patterns:
@@ -49,7 +42,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-      time: "17:00"
     assignees:
       - "nerjs"
     labels:
