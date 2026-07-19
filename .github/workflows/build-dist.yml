@@ -1,0 +1,52 @@
+name: build dist
+
+on:
+  push:
+    branches:
+      - master
+      - dependencies
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-dist-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Rebuild bundle
+        run: npm run build
+
+      - name: Resolve committer identity
+        uses: voidmason/git-identity@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          setup: true
+
+      # Push runs with GITHUB_TOKEN, whose commits don't trigger further
+      # workflows, so re-committing dist here can't loop back into itself.
+      - name: Commit dist when it changed
+        run: |
+          if [ -z "$(git status --porcelain dist)" ]; then
+            echo "dist already up to date"
+            exit 0
+          fi
+          git add dist
+          git commit -m "Rebuild dist"
+          git push

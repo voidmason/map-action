@@ -11,6 +11,11 @@ updates:
       - "bot"
     target-branch: "dependencies"
     open-pull-requests-limit: 5
+    ignore:
+      # typescript-eslint 8.x peers typescript <6.1.0; TS 6.1+ and 7 (native rewrite)
+      # break the ts-jest/eslint/ncc toolchain until they add support
+      - dependency-name: "typescript"
+        versions: [">=6.1"]
     groups:
       actions-toolkit:
         patterns:

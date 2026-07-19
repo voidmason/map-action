@@ -6,10 +6,10 @@
     "lib": ["es6", "es2022", "esnext.asynciterable"],
 
     "outDir": "./dist",
+    "rootDir": "./src",
     "moduleResolution": "Node",
-    "baseUrl": "./src",
+    "ignoreDeprecations": "6.0",
 
-    "noEmitOnError": true,
     "noEmit": true,
     
 
